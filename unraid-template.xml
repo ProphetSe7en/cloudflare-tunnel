@@ -2,7 +2,7 @@
 <Container version="2">
   <Name>cloudflared</Name>
   <Repository>ghcr.io/prophetse7en/cloudflared:latest</Repository>
-  <Registry>https://github.com/ProphetSe7en/cloudflared/pkgs/container/cloudflared</Registry>
+  <Registry>https://github.com/prophetse7en/cloudflared/pkgs/container/cloudflared</Registry>
   <Branch>
     <Tag>latest</Tag>
     <TagDescription>Tracks upstream cloudflare/cloudflared:latest with healthcheck added</TagDescription>
@@ -29,11 +29,13 @@ Setup:&#xD;
   <WebUI/>
   <TemplateURL>https://raw.githubusercontent.com/ProphetSe7en/unraid-templates/main/cloudflared.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/ProphetSe7en/cloudflared/main/cloudflare-icon.png</Icon>
+  <ExtraParams/>
   <PostArgs>tunnel --no-autoupdate run --token YOUR_TUNNEL_TOKEN_HERE</PostArgs>
   <DonateText/>
   <DonateLink/>
   <DonateImg/>
+  <Requires/>
   <Description>Cloudflare Tunnel client with built-in Docker healthcheck. Identical to the official cloudflare/cloudflared image — only a HEALTHCHECK instruction is added. Requires TUNNEL_METRICS environment variable for the healthcheck to work.</Description>
   <Config Name="Tunnel Metrics" Target="TUNNEL_METRICS" Default="0.0.0.0:60123" Mode="" Description="Enables the metrics server inside the container. Required for the healthcheck to work. The port is internal only and not exposed to the host." Type="Variable" Display="always" Required="true" Mask="false">0.0.0.0:60123</Config>
-  <Config Name="Timezone" Target="TZ" Default="Europe/Oslo" Mode="" Description="Container timezone" Type="Variable" Display="always" Required="false" Mask="false">Europe/Oslo</Config>
+
 </Container>
