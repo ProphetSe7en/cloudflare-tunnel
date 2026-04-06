@@ -1,4 +1,4 @@
-# cloudflared
+# cloudflare-tunnel
 
 Minimal wrapper around the official [`cloudflare/cloudflared`](https://hub.docker.com/r/cloudflare/cloudflared) image that adds a Docker healthcheck.
 
@@ -55,7 +55,7 @@ The port number (60123) can be anything — it's only used internally by the con
 docker run -d \
   --name cloudflared \
   -e TUNNEL_METRICS=0.0.0.0:60123 \
-  ghcr.io/prophetse7en/cloudflared:latest \
+  ghcr.io/prophetse7en/cloudflare-tunnel:latest \
   tunnel --no-autoupdate run --token <your-token>
 ```
 
@@ -64,7 +64,7 @@ docker run -d \
 ```yaml
 services:
   cloudflared:
-    image: ghcr.io/prophetse7en/cloudflared:latest
+    image: ghcr.io/prophetse7en/cloudflare-tunnel:latest
     environment:
       - TUNNEL_METRICS=0.0.0.0:60123
     command: tunnel --no-autoupdate run --token <your-token>
@@ -73,7 +73,7 @@ services:
 
 ### Unraid
 
-Use `ghcr.io/prophetse7en/cloudflared:latest` as the Repository in your container template. Add `TUNNEL_METRICS` as a variable with value `0.0.0.0:60123`. No Extra Parameters needed — the healthcheck is built into the image.
+Use `ghcr.io/prophetse7en/cloudflare-tunnel:latest` as the Repository in your container template. Add `TUNNEL_METRICS` as a variable with value `0.0.0.0:60123`. No Extra Parameters needed — the healthcheck is built into the image.
 
 ## Updates
 
@@ -84,7 +84,7 @@ This image is rebuilt automatically every week to track the latest upstream `clo
 You can inspect the image to confirm only a healthcheck was added:
 
 ```bash
-docker inspect ghcr.io/prophetse7en/cloudflared:latest --format '{{json .Config.Healthcheck}}'
+docker inspect ghcr.io/prophetse7en/cloudflare-tunnel:latest --format '{{json .Config.Healthcheck}}'
 ```
 
 Expected output:

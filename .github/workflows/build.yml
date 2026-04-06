@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: prophetse7en/cloudflared
+  IMAGE_NAME: prophetse7en/cloudflare-tunnel
 
 jobs:
   build:

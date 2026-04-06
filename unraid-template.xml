@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <Container version="2">
-  <Name>cloudflared</Name>
-  <Repository>ghcr.io/prophetse7en/cloudflared:latest</Repository>
-  <Registry>https://github.com/prophetse7en/cloudflared/pkgs/container/cloudflared</Registry>
+  <Name>cloudflare-tunnel</Name>
+  <Repository>ghcr.io/prophetse7en/cloudflare-tunnel:latest</Repository>
+  <Registry>https://github.com/prophetse7en/cloudflare-tunnel/pkgs/container/cloudflare-tunnel</Registry>
   <Branch>
     <Tag>latest</Tag>
     <TagDescription>Tracks upstream cloudflare/cloudflared:latest with healthcheck added</TagDescription>
   </Branch>
   <Network>bridge</Network>
   <Privileged>false</Privileged>
-  <Support>https://github.com/ProphetSe7en/cloudflared</Support>
+  <Support>https://github.com/prophetse7en/cloudflare-tunnel</Support>
   <Project>https://github.com/cloudflare/cloudflared</Project>
   <Overview>Cloudflare Tunnel client with built-in Docker healthcheck.&#xD;
 &#xD;
@@ -27,8 +27,8 @@ Setup:&#xD;
 7. Start the container — it should show as healthy within 30 seconds</Overview>
   <Category>Network:Other</Category>
   <WebUI/>
-  <TemplateURL>https://raw.githubusercontent.com/ProphetSe7en/unraid-templates/main/cloudflared.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/ProphetSe7en/cloudflared/main/cloudflare-icon.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/prophetse7en/unraid-templates/main/cloudflare-tunnel.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/prophetse7en/cloudflare-tunnel/main/cloudflare-icon.png</Icon>
   <ExtraParams/>
   <PostArgs>tunnel --no-autoupdate run --token YOUR_TUNNEL_TOKEN_HERE</PostArgs>
   <DonateText/>
@@ -37,5 +37,4 @@ Setup:&#xD;
   <Requires/>
   <Description>Cloudflare Tunnel client with built-in Docker healthcheck. Identical to the official cloudflare/cloudflared image — only a HEALTHCHECK instruction is added. Requires TUNNEL_METRICS environment variable for the healthcheck to work.</Description>
   <Config Name="Tunnel Metrics" Target="TUNNEL_METRICS" Default="0.0.0.0:60123" Mode="" Description="Enables the metrics server inside the container. Required for the healthcheck to work. The port is internal only and not exposed to the host." Type="Variable" Display="always" Required="true" Mask="false">0.0.0.0:60123</Config>
-
 </Container>
