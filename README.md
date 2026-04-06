@@ -91,3 +91,7 @@ Expected output:
 ```json
 {"Test":["CMD","cloudflared","tunnel","ready"],"Interval":30000000000,"Timeout":5000000000,"StartPeriod":10000000000,"Retries":3}
 ```
+
+## Support
+
+Questions or issues? Join the [Discord support channel](https://discordapp.com/channels/492590071455940612/1486391669384417300).
