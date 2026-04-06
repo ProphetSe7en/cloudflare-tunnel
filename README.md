@@ -2,7 +2,13 @@
 
 Minimal wrapper around the official [`cloudflare/cloudflared`](https://hub.docker.com/r/cloudflare/cloudflared) image that adds a Docker healthcheck.
 
-## Why?
+## What is Cloudflare Tunnel?
+
+[Cloudflare Tunnel](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/) (formerly Argo Tunnel) creates a secure, outbound-only connection from your server to Cloudflare's network. It lets you expose local services (web apps, game servers, SSH, etc.) to the internet without opening ports on your router or firewall. All traffic is proxied through Cloudflare, which provides DDoS protection, SSL, and access control via [Zero Trust policies](https://developers.cloudflare.com/cloudflare-one/).
+
+`cloudflared` is the tunnel client that runs on your server and maintains the connection to Cloudflare.
+
+## Why this image?
 
 The official cloudflared image uses a [distroless](https://github.com/GoogleContainerTools/distroless) base with no shell (`/bin/sh`). Docker's `--health-cmd` parameter always runs commands through `/bin/sh`, which means healthchecks added via Docker CLI, Unraid Extra Parameters, or Docker Compose `healthcheck.test` strings will always fail with:
 
