@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>cloudflared</Name>
+  <Repository>ghcr.io/prophetse7en/cloudflared:latest</Repository>
+  <Registry>https://github.com/ProphetSe7en/cloudflared/pkgs/container/cloudflared</Registry>
+  <Branch>
+    <Tag>latest</Tag>
+    <TagDescription>Tracks upstream cloudflare/cloudflared:latest with healthcheck added</TagDescription>
+  </Branch>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/ProphetSe7en/cloudflared</Support>
+  <Project>https://github.com/cloudflare/cloudflared</Project>
+  <Overview>Cloudflare Tunnel client with built-in Docker healthcheck.&#xD;
+&#xD;
+Identical to the official cloudflare/cloudflared image — the only addition is a HEALTHCHECK instruction using the built-in cloudflared tunnel ready command. No files changed, no packages added, no ports opened.&#xD;
+&#xD;
+Why this exists: The official image uses a distroless base with no shell (/bin/sh). Docker's --health-cmd always runs through /bin/sh, so healthchecks added via Extra Parameters will always fail. This image bakes the healthcheck in using exec-form, which bypasses the shell.&#xD;
+&#xD;
+Setup:&#xD;
+1. Go to Cloudflare Zero Trust dashboard (dash.teams.cloudflare.com)&#xD;
+2. Navigate to Networks &gt; Tunnels &gt; Create a tunnel&#xD;
+3. Select Cloudflared as connector, give it a name&#xD;
+4. Choose Docker as the environment — Cloudflare shows you a token&#xD;
+5. Copy the token and paste it in Post Arguments below, replacing YOUR_TUNNEL_TOKEN_HERE&#xD;
+6. The TUNNEL_METRICS variable is already set — this is required for the healthcheck&#xD;
+7. Start the container — it should show as healthy within 30 seconds</Overview>
+  <Category>Network:Other</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/ProphetSe7en/unraid-templates/main/cloudflared.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/ProphetSe7en/cloudflared/main/cloudflare-icon.png</Icon>
+  <PostArgs>tunnel --no-autoupdate run --token YOUR_TUNNEL_TOKEN_HERE</PostArgs>
+  <DonateText/>
+  <DonateLink/>
+  <DonateImg/>
+  <Description>Cloudflare Tunnel client with built-in Docker healthcheck. Identical to the official cloudflare/cloudflared image — only a HEALTHCHECK instruction is added. Requires TUNNEL_METRICS environment variable for the healthcheck to work.</Description>
+  <Config Name="Tunnel Metrics" Target="TUNNEL_METRICS" Default="0.0.0.0:60123" Mode="" Description="Enables the metrics server inside the container. Required for the healthcheck to work. The port is internal only and not exposed to the host." Type="Variable" Display="always" Required="true" Mask="false">0.0.0.0:60123</Config>
+  <Config Name="Timezone" Target="TZ" Default="Europe/Oslo" Mode="" Description="Container timezone" Type="Variable" Display="always" Required="false" Mask="false">Europe/Oslo</Config>
+</Container>

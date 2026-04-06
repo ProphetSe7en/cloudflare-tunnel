@@ -1,4 +1,4 @@
-# cloudflared-healthcheck
+# cloudflared
 
 Minimal wrapper around the official [`cloudflare/cloudflared`](https://hub.docker.com/r/cloudflare/cloudflared) image that adds a Docker healthcheck.
 
@@ -30,6 +30,16 @@ TUNNEL_METRICS=0.0.0.0:60123
 ```
 
 The port number (60123) can be anything — it's only used internally by the container. Without this variable, the ready command has no endpoint to query and the healthcheck will always fail.
+
+## Getting your tunnel token
+
+1. Log in to the [Cloudflare Zero Trust dashboard](https://dash.teams.cloudflare.com)
+2. Go to **Networks > Tunnels > Create a tunnel**
+3. Select **Cloudflared** as the connector type
+4. Give your tunnel a name (e.g. `unraid`, `homelab`)
+5. Choose **Docker** as the environment
+6. Cloudflare displays a `docker run` command — copy the token (the long string after `--token`)
+7. Configure your tunnel's public hostnames (which services to expose) in the Cloudflare dashboard
 
 ## Usage
 
