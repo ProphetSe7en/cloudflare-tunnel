@@ -15,7 +15,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      # contents: write is for the keepalive commit in the last step, which
+      # keeps GitHub from disabling the weekly schedule.
+      contents: write
       packages: write
 
     steps:
@@ -39,3 +41,23 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      # GitHub disables a scheduled workflow after 60 days without repo
+      # activity, and these wrappers never get commits: the Dockerfile is
+      # two lines that do not change. Workflow runs do not count as
+      # activity, so the schedule switched itself off (state
+      # disabled_inactivity) and the image went stale against upstream.
+      # Recording each run in a file resets that timer. The push uses the
+      # run-scoped GITHUB_TOKEN, and pushes made with it do not trigger
+      # workflows, so this cannot loop.
+      - name: Record the build to keep the schedule alive
+        if: github.event_name == 'schedule'
+        run: |
+          mkdir -p .github
+          date -u +'Last scheduled rebuild: %Y-%m-%dT%H:%M:%SZ' > .github/last-build.txt
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/last-build.txt
+          git diff --cached --quiet && exit 0
+          git commit -m 'chore: record weekly rebuild'
+          git push
